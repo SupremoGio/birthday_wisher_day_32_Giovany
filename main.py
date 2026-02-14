@@ -21,6 +21,10 @@ today_month = time.month
 
 today = today_month, today_day
 
+EMAIL = "gioalberto50@gmail.com"
+PASSWORD =  "izqndsbvmslaalrk"
+RECEIVER_MAIL = "gioalberto50@icloud.com"
+
 
 # HINT 2: Use pandas to read the birthdays.csv
 
@@ -64,6 +68,13 @@ if today in birthdays_dict:
     with open(random_letter, "r") as file:
         content = file.read().replace("[NAME]", nombre)
         print(content)
+
+
+    
+    with smtplib.SMTP("smtp.gmail.com", 587 ) as connection:
+        connection.starttls()
+        connection.login(user=EMAIL,password=PASSWORD)
+        connection.sendmail(from_addr=EMAIL, to_addrs=RECEIVER_MAIL,msg=f"Subject: Happy birthday \n\n  {content}")
 
 
 
